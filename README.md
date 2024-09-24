@@ -10,6 +10,50 @@ MedResearchAI is a Streamlit-based application that leverages the power of PubMe
 - Interactive Q&A based on the retrieved research
 - Display of full citations for all referenced articles
 
+## Query Enhancement Process
+
+MedResearchAI uses advanced query enhancement techniques to improve the relevance and comprehensiveness of search results from both PubMed and Google Scholar.
+
+### PubMed Query Enhancement
+
+For PubMed searches, we leverage the Medical Subject Headings (MeSH) system to create more effective queries:
+
+1. **MeSH Term Identification**: The user's initial query is analyzed to identify relevant MeSH terms. This process uses the hierarchical structure of MeSH to find both broad and specific terms related to the query.
+
+2. **Query Expansion**: The identified MeSH terms are added to the original query using appropriate PubMed search tags. For example:
+   - Original query: "diabetes treatment"
+   - Enhanced query: "diabetes treatment[Title/Abstract] OR Diabetes Mellitus/therapy[MeSH]"
+
+3. **Recency Focus**: To prioritize recent research, we may add date restrictions to the query, such as:
+   - Enhanced query: "(diabetes treatment[Title/Abstract] OR Diabetes Mellitus/therapy[MeSH]) AND ("last 5 years"[PDat])"
+
+4. **Field-Specific Searches**: We may also include specific field searches to target titles, abstracts, or other relevant fields:
+   - Example: "(diabetes[Title] AND (treatment[Title] OR therapy[Title]))"
+
+This process helps ensure that the PubMed search captures relevant articles using standardized medical terminology while focusing on recent and pertinent research.
+
+### Google Scholar Query Enhancement
+
+For Google Scholar, which doesn't use a standardized vocabulary like MeSH, we employ different techniques to enhance the query:
+
+1. **Keyword Expansion**: We analyze the user's query to identify key medical concepts and expand them with relevant synonyms or related terms.
+
+2. **Phrase Formulation**: We may reformulate the query into specific phrases that are likely to appear in scholarly articles.
+
+3. **Publication Type Targeting**: We might add terms to target specific types of publications, such as "clinical trial", "systematic review", or "meta-analysis".
+
+4. **Date Restrictions**: Similar to PubMed, we may add date restrictions to focus on recent research.
+
+5. **Domain-Specific Terms**: We may include domain-specific terminology that's commonly used in scholarly medical literature.
+
+Example:
+- Original query: "new diabetes treatments"
+- Enhanced query: "novel diabetes therapies OR innovative glucose management clinical trials 2019..2024"
+
+This enhancement process for Google Scholar aims to broaden the search to capture relevant articles while maintaining specificity to the medical domain and recency of the research.
+
+By using these query enhancement techniques, MedResearchAI strives to provide comprehensive and relevant results from both PubMed and Google Scholar, offering users a well-rounded view of the current research landscape on their topic of interest.
+
 ## Requirements
 - Python 3.7+
 - AWS account with access to Amazon Bedrock
